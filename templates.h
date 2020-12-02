@@ -305,7 +305,23 @@ void List<T>::buscar_nom(T nom)
 template<typename T>
 void List<T>::Eliminar_Todo()
 {
-   
+	if(number_nodo == 0){
+		cout << "La Agenda esta Vacía" << endl;
+	}
+	else{
+		Nodo<T> *temp=ptrHead;
+		Nodo<T> *aux;
+		
+		for(int i=i; i<number_nodo; i++){
+			aux = temp->next;
+			temp.~Nodo();
+			temp = aux;
+		}
+		temp.~Nodo();
+		prtHead = NULL;
+		ptrEnd = NULL;
+		number_nodo = 0;
+	}
 }
 
 template<typename T>
