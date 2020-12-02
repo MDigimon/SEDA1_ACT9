@@ -280,7 +280,26 @@ void List<T>::invertir()
 template<typename T>
 void List<T>::buscar_nom(T nom)
 {
-   
+	if(number_nodo == 0){
+		cout << "La Agenda esta Vacía" << endl;
+	}
+	else{
+		Nodo<T> *temp=ptrHead;
+	    int f=0;
+	    for(int i=0; i<number_nodo){
+	        if(temp->nombre==nom){
+	            cout<<"Encontrado en la posicion: "<< count1 << endl;
+	            temp.print();
+	            f = 1;
+	        }
+	        temp=temp->next;
+	    }
+	    if(f==0){
+	        cout<<"No existe el dato\n";
+	    }
+	    cout << "\n";
+    }
+    system("pause<<cls");
 }
 
 template<typename T>
