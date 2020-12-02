@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string.h>
+#include "funciones.h"
 
 using namespace std;
 
@@ -169,7 +170,7 @@ void List<T>::delete_position(int pos){
 		Nodo<T> *temp=ptrHead;
 		if(pos == 1){
 			ptrHead = temp->next;
-			temp.~Nodo();
+			temp->~Nodo();
 		}
 		else{
 			for(int i=2; i < pos; i++){
@@ -183,7 +184,7 @@ void List<T>::delete_position(int pos){
 			else{
 				aux->next = temp->next;
 			}
-			temp.~Nodo();
+			temp->~Nodo();
 			number_nodo--;
 		}
 		
@@ -265,12 +266,12 @@ void List<T>::invertir()
    			temp = ptrHead;
    			for(int j=1; j < number_nodo; i++){
    				temp = temp->next;
-			   } 
+			   }
 			   base->next = temp;
 			   base = base->next;
 		   }
-		ptrHead = prtEnd;
-		prtEnd = base;
+		ptrHead = ptrEnd;
+		ptrEnd = base;
 		
 		cout << "La Agenda se ha Invertido" << endl;
    }
@@ -286,9 +287,9 @@ void List<T>::buscar_nom(T nom)
 	else{
 		Nodo<T> *temp=ptrHead;
 	    int f=0;
-	    for(int i=0; i<number_nodo){
+	    for(int i=0; i<number_nodo; i++){
 	        if(temp->nombre==nom){
-	            cout<<"Encontrado en la posicion: "<< count1 << endl;
+	            cout<<"Encontrado en la posicion: "<< i+1 << endl;
 	            temp.print();
 	            f = 1;
 	        }
@@ -314,11 +315,11 @@ void List<T>::Eliminar_Todo()
 		
 		for(int i=i; i<number_nodo; i++){
 			aux = temp->next;
-			temp.~Nodo();
+			temp->~Nodo();
 			temp = aux;
 		}
-		temp.~Nodo();
-		prtHead = NULL;
+		temp->~Nodo();
+		ptrHead = NULL;
 		ptrEnd = NULL;
 		number_nodo = 0;
 	}
@@ -327,7 +328,41 @@ void List<T>::Eliminar_Todo()
 template<typename T>
 void List<T>::Ordenar()
 {
-   
+   if(number_nodo == 0){
+		cout << "La Agenda esta Vacía" << endl;
+	}
+	else{
+		int f=1;
+		Nodo<T> *temp;
+		Nodo<T> *aux;
+		
+		while(f = 1){
+			temp=ptrHead;
+			f = 0;
+			aux = temp;
+			temp = temp->next;
+			if(ordenar_alf(temp->id, temp->next->id) == 2){
+				aux->next = temp->next;
+				temp->next = aux;
+				f = 1;
+			}
+			
+			
+			for(int i = 2; i < number_nodo; i++){
+				if(ordenar_alf(temp->id, temp->next->id) == 2){
+					aux->next=temp->next;
+					temp->next = temp->next->next;
+					aux->next->next = temp;
+					
+					aux = aux->next;
+					temp = temp->next;
+					f = 1;
+				}
+			}
+		}
+		cout << "Nodos Ordenados" << endl;
+	}
+	system("pause<<cls");
 }
 
 template<typename T>
