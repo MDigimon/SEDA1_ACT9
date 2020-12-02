@@ -55,6 +55,7 @@ class List
 {
 private:
     Nodo<T> *ptrHead;
+    Nodo<T> *ptrEnd;
     int number_nodo;
 public:
         List();
@@ -80,6 +81,7 @@ List<T>::List()
 {
     number_nodo=0;
     ptrHead=NULL;
+    ptrEnd=NULL;
 }
 
 
@@ -95,6 +97,7 @@ void List<T>::add_head(T id_,T nombre_)
     Nodo<T> *temp = ptrHead;
     if(!ptrHead){
         ptrHead=new_nodo;
+        ptrEnd = new_nodo;
     }
     else{
         new_nodo->next=ptrHead;
@@ -110,7 +113,16 @@ void List<T>::add_head(T id_,T nombre_)
 template<typename T>
 void List<T>::add_end(T id_,T nombre_)
 {
-    
+	Nodo<T> *new_nodo=new Nodo<T>(id_,nombre_);
+	if(!ptrHead){
+        ptrHead=new_nodo;
+        ptrEnd = new_nodo;
+    }
+    else{
+    	new_nodo->next = ptrEnd;
+    	ptrEnd = new_nodo;
+	}
+	number_nodo++;
 }
 
 
@@ -141,8 +153,42 @@ void List<T>::add_sort(T id_,T nombre_)
 
 template<typename T>
 void List<T>::delete_position(int pos){
-	
-   
+	if(number_nodo == 0){
+		cout << "La Agenda esta Vacía" << endl;
+	}
+	else if(pos > number_nodo){
+		cout << "No Extiste un Nodo en esa Posición" << endl;
+		system("pause<<cls");
+	}
+	else if(number_nodo == 1){
+		ptrHead = NULL;
+		ptrEnd = NULL;
+		number_nodo = 0;
+	}
+	else{
+		Nodo<T> *temp=ptrHead;
+		if(pos == 1){
+			ptrHead = temp->next;
+			temp.~Nodo();
+		}
+		else{
+			for(int i=2; i < pos; i++){
+				temp = temp->next;
+			}
+			Nodo<T> *aux=temp;
+			temp = temp->next;
+			if(pos == number_nodo){
+				ptrEnd = aux;
+			}
+			else{
+				aux->next = temp->next;
+			}
+			temp.~Nodo();
+			number_nodo--;
+		}
+		
+	}
+   system("pause<<cls");
 }
 
 
@@ -196,8 +242,8 @@ void List<T>::buscar_pos(int pos)
             cout<<"aux"<<i<<"="<<aux->id<<endl;
                 aux=aux->next;
         }
-    cout<<"Id-."<<aux->id<<endl;
-    cout<<"Nombre-."<<aux->nombre<<endl;
+    	cout<<"Id-."<<aux->id<<endl;
+    	cout<<"Nombre-."<<aux->nombre<<endl;
    
         }
         else
