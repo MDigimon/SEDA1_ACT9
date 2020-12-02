@@ -254,7 +254,27 @@ void List<T>::buscar_pos(int pos)
 template<typename T>
 void List<T>::invertir()
 {
-   
+   if(number_nodo == 0){
+   	cout << "La Agenda esta Vacía" << endl;
+   }
+   else{
+   		Nodo<T> *temp=ptrHead;
+   		Nodo<T> *base=ptrEnd;
+		
+   		for(int i=1; i < number_nodo; i++){
+   			temp = ptrHead;
+   			for(int j=1; j < number_nodo; i++){
+   				temp = temp->next;
+			   } 
+			   base->next = temp;
+			   base = base->next;
+		   }
+		ptrHead = prtEnd;
+		prtEnd = base;
+		
+		cout << "La Agenda se ha Invertido" << endl;
+   }
+   system("pause<<cls");
 }
 
 template<typename T>
