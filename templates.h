@@ -114,17 +114,27 @@ void List<T>::add_head(T id_,T nombre_)
 template<typename T>
 void List<T>::add_end(T id_,T nombre_)
 {
-	Nodo<T> *new_nodo = new Nodo<T>(id_,nombre_);
+	Nodo<T> *new_nodo = new Nodo<T>(id_, nombre_);
 	Nodo<T> *temp = ptrHead;
-	if(!ptrHead){
+	if(ptrHead == NULL){
         ptrHead = new_nodo;
         ptrEnd = new_nodo;
     }
     else{
+    	//cout << "number_nodo: " << number_nodo << endl;
+    //	system("pause");
     	for(int i=1; i<number_nodo; i++){
+    		//cout << "ID: " << temp->id;
+    		//cout << "\tNombre: " << temp->nombre << endl;
     		temp=temp->next;
+    		//system("pause");
 		}
+		
     	temp = new_nodo;
+    	//cout << "Asignado" << endl;
+		//cout << "ID: " << temp->id;
+    	//cout << "\tNombre: " << temp->nombre << endl;
+    //	system("pause");
     	ptrEnd = temp;
 	}
 	number_nodo++;

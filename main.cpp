@@ -56,8 +56,11 @@ int main() {
 			
 			if(opc == "1")
 				list1.add_head(id_, nombre);
-			else if(opc == "2")
+			else if(opc == "2"){
 				list1.add_end(id_, nombre);
+				
+			}
+			
 			else if(opc == "3")
 				list1.add_sort(id_, nombre);
 		}
