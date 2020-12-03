@@ -41,8 +41,8 @@ Nodo<T>::Nodo(T id_,T nombre_ )
 template<typename T>
 void Nodo<T>::print()
 {
-    cout<<"Id:"<<id<<endl;
-    cout<<"Nombre:"<<nombre<<endl;
+    cout<<"Id:" << id << endl;
+    cout<<"Nombre:" << nombre << endl;
   
 }
 
@@ -101,8 +101,8 @@ void List<T>::add_head(T id_,T nombre_)
         ptrEnd = new_nodo;
     }
     else{
-        new_nodo->next=ptrHead;
-        ptrHead= new_nodo;
+        new_nodo->next = ptrHead;
+        ptrHead = new_nodo;
         while(temp){
             temp=temp->next;
         }
@@ -114,14 +114,18 @@ void List<T>::add_head(T id_,T nombre_)
 template<typename T>
 void List<T>::add_end(T id_,T nombre_)
 {
-	Nodo<T> *new_nodo=new Nodo<T>(id_,nombre_);
+	Nodo<T> *new_nodo = new Nodo<T>(id_,nombre_);
+	Nodo<T> *temp = ptrHead;
 	if(!ptrHead){
-        ptrHead=new_nodo;
+        ptrHead = new_nodo;
         ptrEnd = new_nodo;
     }
     else{
-    	new_nodo->next = ptrEnd;
-    	ptrEnd = new_nodo;
+    	for(int i=1; i<number_nodo; i++){
+    		temp=temp->next;
+		}
+    	temp = new_nodo;
+    	ptrEnd = temp;
 	}
 	number_nodo++;
 }
@@ -150,6 +154,7 @@ void List<T>::add_sort(T id_,T nombre_)
             }
     }
     number_nodo++;
+    Ordenar();
 }
 
 template<typename T>
@@ -201,10 +206,10 @@ void List<T>::print()
         cout<<"La Agenda esta vacia\n";
  }
     else{
-        while(temp){
+        for(int i=0; i < number_nodo; i++){
             temp->print();
-            cout<<"\n\n";
-                temp=temp->next;
+            cout << endl;
+            temp=temp->next;
         }
     }
 
@@ -290,7 +295,7 @@ void List<T>::buscar_nom(T nom)
 	    for(int i=0; i<number_nodo; i++){
 	        if(temp->nombre==nom){
 	            cout<<"Encontrado en la posicion: "<< i+1 << endl;
-	            temp.print();
+	            temp->print();
 	            f = 1;
 	        }
 	        temp=temp->next;

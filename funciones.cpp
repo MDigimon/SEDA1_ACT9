@@ -22,3 +22,14 @@ int ordenar_alf(string a, string b){
 		return 2;
 	}
 }
+
+int comprobar(string dato){
+	for(int i=0; i < dato.size(); i++){
+		if(isdigit(dato[i]) == 0){
+			if(dato[i] != 0){
+				return 0;
+			}
+		}
+	}
+	return 1;
+}

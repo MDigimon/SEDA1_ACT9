@@ -7,11 +7,9 @@ using namespace std;
 
 int main() {
 	List<string> list1;
-    int element,dimention,pos,dat;
-    string id_ ,nombre_,correo_,numero_,direccion_;
-    char opc;
-    do{
-    		
+    string id_, nombre, pos, opc;
+    int f=1;
+    while(f == 1){
         cout<<"1-.Agregar contacto \n";
         cout<<"2-.Buscar contacto.\n";
         cout<<"3-.Eliminar contacto.\n";
@@ -24,102 +22,128 @@ int main() {
         cout<<"10-.Eliminar Todo\n";
         cout<<"0-.Salir..\n";
         cout<<"Seleccione un opcion\n";
-         do{
-		 cin.sync();
-		 cin>>opc;
-        if(opc<='0' || opc>='9'){
-                 	cout<<"Ingresa puros numeros"<<endl;
+        
+		cin.sync();
+		getline(cin,opc);
+		
+        
+        if(opc == "1"){
+			system ("CLS");
+            cin.sync();
+			cout<<"ID \n";
+            do{
+            	getline(cin,id_);
+            	if(id_<="0" || id_>="9"){
+            	cout<<"Ingresa puros numeros"<<endl;
 				}
-		}while(opc<='0'|| opc>='9');
-         
-         
-         
-         switch (opc){
-             case '1':{
-             	system ("CLS");
-             	cin.sync();
-				  cout<<"ID \n";
-             	do{
-             		
-                getline(cin,id_);
-                
-                   	if(id_<="0" || id_>="9"){
-                 		cout<<"Ingresa puros numeros"<<endl;
-					 }
-				}while(id_<="0"|| id_>="9");
-				 
-               
-                cout<<"Nombre \n";
-                getline(cin,nombre_);
-             
+			}while(id_< "0"|| id_ > "9");
+			
+            cout<<"Nombre \n";
+            getline(cin,nombre);
+            cout << endl << "1-.Agregar al inicio \n";
+        	cout << "2-.Agregar al final\n";
+        	cout << "2-.Agregar n una Posicion\n";
+			cout << "0-.Cancelar\n";
+			
+			do{
+				cout << "Seleccione un opcion:";
+				cin.sync();
+				cin>>opc;
+				if(opc != "1" && opc != "2" && opc != "0"){
+                cout<<"Ingresa puros numeros"<<endl;
+            	}
+			}while(opc != "1" && opc != "2" && opc != "3" && opc != "0");
+			
+			if(opc == "1")
+				list1.add_head(id_, nombre);
+			else if(opc == "2")
+				list1.add_end(id_, nombre);
+			else if(opc == "3")
+				list1.add_sort(id_, nombre);
+		}
+    	
+        else if(opc == "2"){
+        	while(true){
+        		cout << "ID a buscar: ";
+        		getline(cin,id_);
+        		if(comprobar(id_) == 1){
+        			break;
+				}
+				cout << "Dato Incorrecto" << endl << endl;
+			}
+        	
+        	list1.Search(id_);
+		}
+        
+        else if(opc == "3"){
+        	while(true){
+        		cout << "Posicion a Eliminar: ";
+        		getline(cin,pos);
+        		if(comprobar(pos) == 1){
+        			break;
+				}
+				cout << "Solo se Admiten Numeros" << endl << endl;
+			}
+        	list1.delete_position(stoi(pos));
+		}
+		
+		else if(opc == "4"){
+			while(true){
+        		cout << "Posicion a Buscar: ";
+        		getline(cin,pos);
+        		if(comprobar(pos) == 1){
+        			break;
+				}
+				cout << "Solo se Admiten Numeros" << endl << endl;
+			}
+			list1.buscar_pos(stoi(pos));
+		}
+		
+		else if(opc == "5"){
+			list1.invertir();
+		}
+		
+		else if(opc == "6"){
+			cout << "Nombre a Buscar: ";
+        	getline(cin,nombre);
+        	list1.buscar_nom(nombre);
+		}
+		
+		else if(opc == "7"){
+			list1.Ordenar();
+		}
+		
+		else if(opc == "8"){
+			list1.print();
+		}
+		
+		else if(opc == "9"){
+			while(true){
+        		cout << "Posicion a Modificar: ";
+        		getline(cin,pos);
+        		if(comprobar(pos) == 1){
+        			break;
+				}
+				cout << "Solo se Admiten Numeros" << endl << endl;
+			}
+			list1.Modificar(stoi(pos));
+		}
+		
+		else if(opc == "10"){
+			list1.Eliminar_Todo();
+		}
+		else if(opc == "0"){
+			cout << "FIN DEL PROGRAMA" << endl;
+			f = 0;
+		}
+		else{
+			cout << "Opcion Incorrecto" << endl;
+		}
 
-                list1.add_head(id_,nombre_);
-                list1.print();
-                break;
-             }
-            
-             case '2':{
-                 getline(cin,id_);
-                cout<<"Busca un elemento\n";
-               do{
-			   	
-			    getline(cin,id_);
-			    	if(id_<="0" || id_>="9"){
-                 		cout<<"Ingresa puros numeros"<<endl;
-					 }
-                }while(id_<="0"|| id_>="9");
-                list1.Search(id_);
-                break;
-             }
-             case '3':{
-                cout<<"Elimina posicion\n";
-                cin>>pos;
-                list1.delete_position(pos);
-                list1.print();
-                break;
-             }
-             case '4':{
-                cout<<"Ingresa la posicion que quieres buscar\n";
-                cin.sync();
-                cin>>element;
-                list1.buscar_pos(element);
-                break;
-             }
-             case '5':{
-             
-             break;
-             }
-             case '6':{
-            
-                break;
-             }
-             case '7':{
-                    list1.print();
-                    list1.Ordenar();
-                    list1.print();
-                    break;
-             }
-             case '8':{
-                list1.print();
-                break;
-             }
-             case '9':{
-                cout<<"Ingresa la posicion del dato a modificar\n";
-                cin.sync();
-                cin>>dat;
-                list1.Modificar(dat);
-                break;
-             }
-              case '0':{
-                    list1.Eliminar_Todo();
-                    break;
-              }
-
-        }
         cout<<endl;
         system("pause");
         system("cls");
-    }while(opc!=0);
+    }
 	
 	
 	return 0;
